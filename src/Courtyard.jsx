@@ -1,0 +1,14 @@
+import React,{useRef,useEffect} from 'react';
+import {Box} from './CharacterModels.jsx';
+import Architecture from './Architecture.jsx';
+import * as THREE from 'three';
+function Stool({p}){return <group position={p}><Box p={[0,.55,0]} s={[.65,.15,.6]} c="#927047"/>{[-.23,.23].flatMap(x=>[-.2,.2].map(z=><Box key={`${x}${z}`} p={[x,.27,z]} s={[.09,.55,.09]} c="#796043"/>))}</group>}
+function Plant({p}){return <group position={p}><mesh position={[0,.25,0]} castShadow><cylinderGeometry args={[.3,.22,.5,7]}/><meshStandardMaterial color="#a96648"/></mesh>{[0,1,2,3,4].map(i=><mesh key={i} position={[Math.sin(i*2)*.22,.7+i*.08,Math.cos(i*2)*.2]}><icosahedronGeometry args={[.35,0]}/><meshStandardMaterial color={i%2?'#83965c':'#567957'}/></mesh>)}</group>}
+function Paving(){const ref=useRef();useEffect(()=>{const o=new THREE.Object3D();const colors=['#c9bc9c','#c3b594','#b9ae92','#d0c2a4'];for(let i=0;i<21;i++)for(let j=0;j<21;j++){const n=i*21+j;o.position.set(-10+i,.005+(i*j%3)*.004,-10+j);o.updateMatrix();ref.current.setMatrixAt(n,o.matrix);ref.current.setColorAt(n,new THREE.Color(colors[(i*7+j*3)%4]));}ref.current.instanceMatrix.needsUpdate=true;ref.current.instanceColor.needsUpdate=true},[]);return <instancedMesh ref={ref} args={[null,null,441]} receiveShadow><boxGeometry args={[.95,.05,.95]}/><meshStandardMaterial roughness={1}/></instancedMesh>}
+export default function Courtyard(){return <><Box p={[0,-.18,0]} s={[23,.3,23]} c="#b9aa88"/><Paving/><Architecture/><Box p={[0,1.4,-9.91]} s={[1.7,2.8,.3]} c="#4b7770"/><Box p={[.55,1.2,-9.7]} s={[.12,.12,.08]} c="#c3a65f"/>
+{/* table */}<group position={[1,0,-4]}><Box p={[0,.95,0]} s={[3.6,.18,1.4]} c="#9a6546"/><Box p={[0,1.06,0]} s={[2.5,.025,1.43]} c="#ba6951"/>{[-1.4,1.4].flatMap(x=>[-.48,.48].map(z=><Box key={`${x}${z}`} p={[x,.45,z]} s={[.14,.9,.14]} c="#6f5c43"/>))}{[-.8,0,.8].map(x=><mesh key={x} position={[x,1.14,0]}><cylinderGeometry args={[.18,.12,.1,12]}/><meshStandardMaterial color="#e6e2c8"/></mesh>)}</group><Stool p={[-.4,0,-2.7]}/><Stool p={[2,0,-2.7]}/><Stool p={[1,0,-5.3]}/>
+<group position={[-7,0,0]}><Stool p={[0,0,0]}/><Box p={[0,.96,0]} s={[1,.6,.4]} c="#6c5842"/><Box p={[-.15,.96,.23]} s={[.5,.36,.035]} c="#c3b598"/><mesh position={[.3,.93,.23]} rotation={[Math.PI/2,0,0]}><cylinderGeometry args={[.07,.07,.05,12]}/><meshStandardMaterial color="#ddd1aa"/></mesh><Box p={[.3,1.5,0]} s={[.025,.6,.025]} c="#8c9893"/></group>
+{[[-6,0,5],[4.9,0,-6.6],[6,0,4],[-8,0,-7],[8,0,7]].map((p,i)=><Plant key={i} p={p}/>)}
+{[-4,-2,0,2,4].map(x=><mesh key={x} position={[x,3.3,-8.6]} rotation={[0,0,.12]}><octahedronGeometry args={[.23,0]}/><meshStandardMaterial color="#be5740"/></mesh>)}
+<mesh position={[-5,.03,6]} rotation={[-Math.PI/2,0,.5]}><circleGeometry args={[1.7,7]}/><meshStandardMaterial color="#88986c"/></mesh>
+</>}

@@ -1,3 +1,4 @@
+import {enterExploration} from './enter-exploration.mjs';
 import {chromium} from '@playwright/test';
 import {spawn} from 'node:child_process';
 import {existsSync,mkdirSync,writeFileSync} from 'node:fs';
@@ -11,7 +12,7 @@ try{
  for(const mode of ['desktop','touch']){
   const page=await browser.newPage({viewport:mode==='touch'?{width:844,height:390}:{width:1100,height:720},hasTouch:mode==='touch',isMobile:mode==='touch'});
   const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto(url);
-  await page.getByRole('button',{name:'走进旧时光'}).click({timeout:45000});
+  await enterExploration(page);
   await page.waitForFunction(()=>window.__LIYUAN_TEST__);
   await page.evaluate(()=>window.__LIYUAN_TEST__.setManual(true));
   // Real screen dragging aligns the camera with world north; no test changes to position or floor.

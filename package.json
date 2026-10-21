@@ -10,7 +10,8 @@
     "test:physics": "node tests/movement.test.mjs",
     "test:browser": "node tests/browser-movement.mjs",
     "deploy": "node scripts/deploy.mjs",
-    "test:production": "node tests/production-smoke.mjs"
+    "test:production": "node tests/production-smoke.mjs",
+    "test:opening": "node tests/opening.test.mjs && node tests/opening-browser.mjs"
   },
   "dependencies": {
     "@dimforge/rapier3d-compat": "^0.21.0",
