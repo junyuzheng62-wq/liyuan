@@ -82,3 +82,15 @@ npm run build
 测试：`npm run test:opening`。包含时间线连续性检查与实际等待四幕完整播放的 Chromium 手机触控模拟；检查关节、门角度、场景/人物淡化、跳过、重看、静音及原游戏交接。详情见 [开场验证报告](docs/opening-validation.md)。现有 `test:browser` 和 `test:production` 通过新入口进入探索，原移动检查保留。
 
 原入口 https://junyuzheng62-wq.github.io/liyuan/ ，`/liyuan/z/` 提供静态跳转。恢复分支为 `backup/before-opening-animation`。
+
+## 交织里院 · 第一人称灰盒
+
+按用户确认先使用现有网页技术开发，Unity 迁移后续进行。新入口为 **https://junyuzheng62-wq.github.io/liyuan/graybox/**，原版本根入口保留。
+
+本地启动后打开 `http://localhost:5173/liyuan/graybox/`。可跳过模拟地图扫描与 3D 过场，进入家中，开门出院、与三名居民交谈、接水送水、拿书包、上下楼并进入二层房间。支持第一人称双指触控、地图、背包、海鸥提示、自动保存、保存退出和继续。
+
+当前为 **Phase 1 里院核心**：门外仅测试街段，清晨流程可完成。学校／公园／市场／电影院、小卖部与完整一天尚未开发。资产为功能色块灰盒，不作准确历史复原声明。详见 [灰盒验证报告](docs/connect-graybox-phase1.md)。
+
+Blender 源文件：`design/blockout/liyuan-phase1.blend`。尺寸与锚点：`design/blockout/layout.json`。网页实际读取 `public/graybox/liyuan-phase1.glb`。安装 Blender 后可用 `npm run build:blockout` 重新生成；普通网页运行不需要 Blender。
+
+验证：`npm run test:graybox`、`npm run build`、`npm run test:graybox:production`。使用 Chromium／手机触控模拟，不等于 Safari 真机性能验收。恢复分支 `backup/before-connect-graybox`。

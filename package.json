@@ -11,7 +11,10 @@
     "test:browser": "node tests/browser-movement.mjs",
     "deploy": "node scripts/deploy.mjs",
     "test:production": "node tests/production-smoke.mjs",
-    "test:opening": "node tests/opening.test.mjs && node tests/opening-browser.mjs"
+    "test:opening": "node tests/opening.test.mjs && node tests/opening-browser.mjs",
+    "test:graybox": "node tests/graybox/run.mjs",
+    "test:graybox:production": "node tests/graybox/run.mjs --production",
+    "build:blockout": "python3 design/blockout/generate_layout.py && blender -b --python design/blockout/build_blender.py"
   },
   "dependencies": {
     "@dimforge/rapier3d-compat": "^0.21.0",
